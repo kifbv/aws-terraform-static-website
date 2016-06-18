@@ -7,8 +7,6 @@ variable "root_domain" { }
 variable "www_domain" { }
 variable "logs" { }
 variable "originID" { }
-variable "aws_region" { }
-variable "aws_profile" { }
 
 # you can keep these ones
 variable "index_document" { default = "index.html" }

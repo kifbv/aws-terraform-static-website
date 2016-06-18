@@ -3,6 +3,8 @@
 ##############
 
 # the following are initialised in you module declaration
+variable "aws_region" { }
+variable "aws_profile" { }
 variable "root_domain" { }
 variable "www_domain" { }
 variable "logs" { }

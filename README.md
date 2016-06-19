@@ -12,9 +12,8 @@ Module Input Variables
 ----------------------
 
 You'll need to initialise at least these when using this module:
-- `root_domain` - your registered domain name e.g. franck.live
+- `domain_names` - your registered domain name e.g. franck.live
 - `logs`        - choose a bucket name for your logs
-- `originID`    - choose a bucket name for your cloudfront origin identity
 
 For more control over what's going on, have a look in `variables.tf`
 
@@ -32,11 +31,10 @@ provider "aws" {
 module "static_website" {
   source="github.com/KifBV/aws-terraform-static-website"
 
-  # adapt these to your domain name
+  # adapt these to your domain names
   # and s3 buckets availability
-  root_domain = "franck.live"
-  logs        = "franck-static-web-logs"
-  originID    = "franck_live_origin"
+  domain_names = "franck.live,franck.rocks"
+  logs        = "my-static-web-logs"
 }
 ```
 

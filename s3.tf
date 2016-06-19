@@ -4,7 +4,8 @@
 
 ### main bucket where the static website goes
 resource "aws_s3_bucket" "root_bucket" {
-    bucket = "${var.root_domain}"
+    count  = "${length(compact(split(",", var.domain_names)))}"
+    bucket = "${element(split(",", var.domain_names), count.index)}"
     policy = <<EOF
 {
   "Version":"2012-10-17",
@@ -13,7 +14,7 @@ resource "aws_s3_bucket" "root_bucket" {
     "Effect": "Allow",
     "Principal": "*",
     "Action": "s3:GetObject",
-    "Resource": "arn:aws:s3:::${var.root_domain}/*"
+    "Resource": "arn:aws:s3:::${element(split(",", var.domain_names), count.index)}/*"
   }
  ]
 }
@@ -33,12 +34,12 @@ EOF
     }
 
     tags {
-        Name = "${var.root_domain} s3 bucket"
+        Name = "${element(split(",", var.domain_names), count.index)} s3 bucket"
     }
 
    logging {
        target_bucket = "${aws_s3_bucket.logs_bucket.id}"
-       target_prefix = "${var.root_domain}_s3/"
+       target_prefix = "${element(split(",", var.domain_names), count.index)}_s3/"
    }
 }
 

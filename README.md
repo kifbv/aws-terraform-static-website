@@ -8,7 +8,6 @@ Resources Provided
 - route 53 hosted zone with A records for root and www domain + Name Servers (see Outputs below)
 - cloudfront distribution with s3 origin
 
-
 Module Input Variables
 ----------------------
 
@@ -23,19 +22,21 @@ Usage
 -----
 
 ```tf
-module "static_website" {
-  source="github.com/KifBV/aws-static-website"
+# you don't necessarily need to define a provider
+# here if you've already defined it elsewhere
+provider "aws" {
+  region  = "eu-west-1"
+  profile = "circle_ci"
+}
 
-  # you don't need to specify the region and profile
-  # if you already initialise them elsewhere
-  aws_region = "eu-west-1"
-  aws_profile = "circle_ci"
+module "static_website" {
+  source="github.com/KifBV/aws-terraform-static-website"
 
   # adapt these to your domain name
   # and s3 buckets availability
   root_domain = "franck.live"
-  logs = "franck-static-web-logs"
-  originID = "franck_live_origin"
+  logs        = "franck-static-web-logs"
+  originID    = "franck_live_origin"
 }
 ```
 
@@ -54,4 +55,4 @@ If the static content you need to upload for `mysite.com` is in the `~/static-we
 Links
 -----
 
-AWS whitepaper on [building static websites](https://d0.awsstatic.com/whitepapers/Building%20Static%20Websites%20on%20AWS.pdf)
+- AWS whitepaper on [building static websites](https://d0.awsstatic.com/whitepapers/Building%20Static%20Websites%20on%20AWS.pdf)

@@ -3,10 +3,7 @@
 ##############
 
 # the following are initialised in you module declaration
-variable "aws_region" { }
-variable "aws_profile" { }
 variable "root_domain" { }
-variable "www_domain" { }
 variable "logs" { }
 variable "originID" { }
 
@@ -29,18 +26,8 @@ variable "price_class" { default = "PriceClass_100" }
 ### outputs ###
 ###############
 
-output "NS0" {
-  value ="${aws_route53_zone.root_zone.name_servers.0}"
-}
-
-output "NS1" {
-  value ="${aws_route53_zone.root_zone.name_servers.1}"
-}
-
-output "NS2" {
-  value ="${aws_route53_zone.root_zone.name_servers.2}"
-}
-
-output "NS3" {
-  value ="${aws_route53_zone.root_zone.name_servers.3}"
-}
+# you will need to tell these to your domain name registrar
+output "NS0" { value ="${aws_route53_zone.root_zone.name_servers.0}" }
+output "NS1" { value ="${aws_route53_zone.root_zone.name_servers.1}" }
+output "NS2" { value ="${aws_route53_zone.root_zone.name_servers.2}" }
+output "NS3" { value ="${aws_route53_zone.root_zone.name_servers.3}" }

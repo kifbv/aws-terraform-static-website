@@ -28,7 +28,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     prefix          = "${var.root_domain}_cdn/"
   }
 
-  aliases = ["${var.root_domain}", "${var.www_domain}"]
+  aliases = ["${var.root_domain}", "www.${var.root_domain}"]
 
   default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]

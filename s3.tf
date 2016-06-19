@@ -42,20 +42,6 @@ EOF
    }
 }
 
-### s3 bucket for www redirects to root s3 bucket
-resource "aws_s3_bucket" "www_bucket" {
-    bucket = "${var.www_domain}"
-    acl = "public-read"
-
-    website {
-        redirect_all_requests_to = "${var.root_domain}"
-    }
-
-    tags {
-        Name = "${var.www_domain} s3 bucket"
-    }
-}
-
 ### s3 bucket for all static websites + cdn logs
 resource "aws_s3_bucket" "logs_bucket" {
     bucket = "${var.logs}"

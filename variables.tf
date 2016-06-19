@@ -23,9 +23,9 @@ variable "min_ttl" { default = "0" }
 variable "default_ttl" { default = "3600" }
 variable "max_ttl" { default = "86400" }
 variable "geo_restriction_type" { default = "none" }
-variable "geo_restriction_locations" { default = [""] }
-variable "cache_allowed_methods" { default = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"] }
-variable "cache_cached_methods" { default = ["GET", "HEAD"] }
+#variable "geo_restriction_locations" { default = "" }
+#variable "cache_allowed_methods" { default = "" }
+#variable "cache_cached_methods" { default = "" }
 
 # price class determines how widely your s3 content is copied to edge locations
 # see http://aws.amazon.com/cloudfront/pricing/ for exact locations

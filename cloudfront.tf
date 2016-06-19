@@ -39,8 +39,8 @@ resource "aws_cloudfront_distribution" "s3_distribution_blue" {
 
   # cache behaviour will be common to all websites
   default_cache_behavior {
-    allowed_methods  = "${var.cache_allowed_methods}"
-    cached_methods   = "${var.cache_cached_methods}"
+    allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
+    cached_methods   = ["GET", "HEAD"]
     target_origin_id = "${element(split(",", var.domain_names), count.index)}_${var.origin_suffix}"
     compress         = true
 
@@ -63,7 +63,7 @@ resource "aws_cloudfront_distribution" "s3_distribution_blue" {
   restrictions {
     geo_restriction {
       restriction_type = "${var.geo_restriction_type}"
-      locations        = "${var.geo_resttriction_locations}"
+      locations        = [""]
     }
   }
 
@@ -104,8 +104,8 @@ resource "aws_cloudfront_distribution" "s3_distribution_green" {
 
   # cache behaviour will be common to all websites
   default_cache_behavior {
-    allowed_methods  = "${var.cache_allowed_methods}"
-    cached_methods   = "${var.cache_cached_methods}"
+    allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
+    cached_methods   = ["GET", "HEAD"]
     target_origin_id = "${element(split(",", var.domain_names), count.index)}_${var.origin_suffix}"
     compress         = true
 
@@ -128,7 +128,7 @@ resource "aws_cloudfront_distribution" "s3_distribution_green" {
   restrictions {
     geo_restriction {
       restriction_type = "${var.geo_restriction_type}"
-      locations        = "${var.geo_resttriction_locations}"
+      locations        = [""] 
     }
   }
 

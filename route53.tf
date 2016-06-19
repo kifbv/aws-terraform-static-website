@@ -17,33 +17,33 @@ resource "aws_route53_zone" "root_zone" {
   }
 }
 
-### this is the 'production' record
+### this is the production record
 resource "aws_route53_record" "production" {
   count          = "${length(compact(split(",", var.domain_names)))}"
   name           = "${element(split(",", var.domain_names), count.index)}"
-  zone_id        = "${aws_route53_zone.root_zone.*.zone_id, count.index}"
+  zone_id        = "${element(aws_route53_zone.root_zone.*.zone_id, count.index)}"
   type           = "A"
   weight         = "${var.blue_weight}"
   set_identifier = "${element(split(",", var.domain_names), count.index)}-blue"
   alias {
-    name                   = "${aws_cloudfront_distribution.s3_distribution_blue.*.domain_name, count.index}"
-    zone_id                = "${aws_cloudfront_distribution.s3_distribution_blue.*.hosted_zone_id, count.index}"
+    name                   = "${element(aws_cloudfront_distribution.s3_distribution_blue.*.domain_name, count.index)}"
+    zone_id                = "${element(aws_cloudfront_distribution.s3_distribution_blue.*.hosted_zone_id, count.index)}"
     evaluate_target_health = false
   }
 }
 
-### this is the 'development' record
+### this is the development record
 ### weighted 0 by default (see variables.tf)
 resource "aws_route53_record" "development" {
   count          = "${length(compact(split(",", var.domain_names)))}"
   name           = "${element(split(",", var.domain_names), count.index)}"
-  zone_id        = "${aws_route53_zone.root_zone.*.zone_id, count.index}"
+  zone_id        = "${element(aws_route53_zone.root_zone.*.zone_id, count.index)}"
   type           = "A"
   weight         = "${var.green_weight}"
   set_identifier = "${element(split(",", var.domain_names), count.index)}-green"
   alias {
-    name                   = "${aws_cloudfront_distribution.s3_distribution_green.*.domain_name, count.index}"
-    zone_id                = "${aws_cloudfront_distribution.s3_distribution_green.*.hosted_zone_id, count.index}"
+    name                   = "${element(aws_cloudfront_distribution.s3_distribution_green.*.domain_name, count.index)}"
+    zone_id                = "${element(aws_cloudfront_distribution.s3_distribution_green.*.hosted_zone_id, count.index)}"
     evaluate_target_health = false
   }
 }

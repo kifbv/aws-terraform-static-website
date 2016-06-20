@@ -63,7 +63,7 @@ resource "aws_cloudfront_distribution" "s3_distribution_blue" {
   restrictions {
     geo_restriction {
       restriction_type = "${var.geo_restriction_type}"
-      locations        = ["${split(",", var.geo_restriction_locations)}"]
+      #locations        = ["${split(",", var.geo_restriction_locations)}"]
     }
   }
 
@@ -128,7 +128,7 @@ resource "aws_cloudfront_distribution" "s3_distribution_green" {
   restrictions {
     geo_restriction {
       restriction_type = "${var.geo_restriction_type}"
-      locations        = ["${split(",", var.geo_restriction_locations)}"]
+      #locations        = ["${split(",", var.geo_restriction_locations)}"]
     }
   }
 

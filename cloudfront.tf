@@ -97,9 +97,9 @@ resource "aws_cloudfront_distribution" "s3_distribution_green" {
     prefix          = "${element(split(",", var.domain_names), count.index)}_cdn/"
   }
 
-  # aliases for root, www and production domains
+  # aliases for root, www and development domains
   aliases = ["${element(split(",", var.domain_names), count.index)}",
-             "www.${element(split(",", var.domain_names), count.index)}",
+             "*.${element(split(",", var.domain_names), count.index)}",
              "green.${element(split(",", var.domain_names), count.index)}"]
 
   # cache behaviour will be common to all websites

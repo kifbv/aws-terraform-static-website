@@ -12,8 +12,8 @@ variable "error_document" { default = "error.html" }
 
 ### cloudfront ###
 
-variable "blue_folder" { default = "/" }
-variable "green_folder" { default = "/dev/" }
+variable "blue_folder" { default = "" }
+variable "green_folder" { default = "/dev" }
 variable "log_cookies" { default = "false" }
 variable "origin_suffix" { default = "origin" }
 variable "forward_query_string" { default = "false" }

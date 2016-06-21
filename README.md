@@ -1,18 +1,20 @@
 Static Website Hosting on AWS with Terraform
 ===========
 
-Work in progress...
-
 Main Resources Provided
 ------------------
 
 - 1x s3 bucket for each domain name
 - 1x s3 bucket for all your websites logs
-- 1x route 53 hosted zone for each domain name
-- 1x set of name servers for all your website
+- 1x route 53 hosted zone for each domain name with:
+    - 2x A record aliases to root domain (one pointing to each blue/green cloudfront distribution)
+    - 2x A record aliases to www domain (one pointing to each blue/green cloudfront distribution)
+    - 1x A record aliases to blue domain (pointing to blue cloudfront distribution)
+    - 1x A record aliases to green domain (pointing to green cloudfront distribution)
+- 1x delegation set of name servers for all your website
 - 2x cloudfront distributions with s3 origin for each domain name:
-    - one for your production/blue environment
-    - one for your development/green environment 
+    - one pointing to production/blue environment
+    - one pointing to development/green environment 
 
 Module Input Variables
 ----------------------

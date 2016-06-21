@@ -52,13 +52,15 @@ Outputs
 Upload your content
 -------------------
 
-If the static content you need to upload for `example.com` is in the `~/static-website/output/` directory on your computer, just run:
+If the static content you need to upload for `example.com` is in the `~/static-website/output/` directory on your computer, and assuming your buckets are in the `eu-west-1` region, run:
 
-`aws s3 sync ~/static-website/output s3://example.com/`
+`aws s3 sync ~/static-website/output s3://franck.live/ --profile circle_ci --region=eu-west-1`
 
 If you want to test a variation of your website, upload to the dedicated folder in the bucket (`dev` by default):
 
-`aws s3 sync ~/static-website/output s3://example.com/dev/`
+`aws s3 sync ~/static-website/output/variation s3://example.com/dev/ --profile circle_ci --region=eu-west-1
+
+You can add the `--dryrun` flag to check what would be done...
 
 By default the `green/dev` variation has a weight of 0 and is accessible at `green.example.com`
 

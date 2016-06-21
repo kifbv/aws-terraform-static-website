@@ -33,7 +33,7 @@ resource "aws_route53_record" "production" {
 }
 
 ### this is the production record for www domain
-resource "aws_route53_record" "production" {
+resource "aws_route53_record" "production-www" {
   count          = "${length(compact(split(",", var.domain_names)))}"
   name           = "www.${element(split(",", var.domain_names), count.index)}"
   zone_id        = "${element(aws_route53_zone.root_zone.*.zone_id, count.index)}"
@@ -48,7 +48,7 @@ resource "aws_route53_record" "production" {
 }
 
 ### this is the production record for blue domain
-resource "aws_route53_record" "production" {
+resource "aws_route53_record" "production-blue" {
   count          = "${length(compact(split(",", var.domain_names)))}"
   name           = "blue.${element(split(",", var.domain_names), count.index)}"
   zone_id        = "${element(aws_route53_zone.root_zone.*.zone_id, count.index)}"
@@ -80,7 +80,7 @@ resource "aws_route53_record" "development" {
 
 ### this is the development record for www domain
 ### weighted 0 by default (see variables.tf)
-resource "aws_route53_record" "development" {
+resource "aws_route53_record" "development-www" {
   count          = "${length(compact(split(",", var.domain_names)))}"
   name           = "www.${element(split(",", var.domain_names), count.index)}"
   zone_id        = "${element(aws_route53_zone.root_zone.*.zone_id, count.index)}"
@@ -96,7 +96,7 @@ resource "aws_route53_record" "development" {
 
 ### this is the development record for green domain
 ### weighted 0 by default (see variables.tf)
-resource "aws_route53_record" "development" {
+resource "aws_route53_record" "development-green" {
   count          = "${length(compact(split(",", var.domain_names)))}"
   name           = "green.${element(split(",", var.domain_names), count.index)}"
   zone_id        = "${element(aws_route53_zone.root_zone.*.zone_id, count.index)}"

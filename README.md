@@ -1,6 +1,8 @@
 Static Website Hosting on AWS with Terraform
 ===========
 
+Work in progress...
+
 Main Resources Provided
 ------------------
 
@@ -51,10 +53,13 @@ Upload your content
 -------------------
 
 If the static content you need to upload for `example.com` is in the `~/static-website/output/` directory on your computer, just run:
+
 `aws s3 sync ~/static-website/output s3://example.com/`
 
 If you want to test a variation of your website, upload to the dedicated folder in the bucket (`dev` by default):
+
 `aws s3 sync ~/static-website/output s3://example.com/dev/`
+
 By default the `green/dev` variation has a weight of 0 and is accessible at `green.example.com`
 
 Links

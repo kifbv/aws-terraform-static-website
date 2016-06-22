@@ -8,7 +8,7 @@ variable "logs" { }
 
 # you can keep these ones
 variable "index_document" { default = "index.html" }
-variable "error_document" { default = "error.html" }
+variable "error_document" { default = "404.html" }
 
 # sub-domain names for your test environments
 variable "blue_sub_domain" { default = "blue" }

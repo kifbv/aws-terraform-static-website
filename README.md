@@ -49,7 +49,7 @@ module "static_website" {
 Outputs
 -------
 
- - `NS0` to `NS3` - the nameservers to tell your domain name registrar to use
+ - `NS0` to `NS3` - the nameservers to tell your domain name registrar to use (doesn't seem to be working so need to grep name_servers in the state file).
 
 Upload your content
 -------------------
@@ -60,7 +60,7 @@ If the static content you need to upload for `example.com` is in the `~/static-w
 
 If you want to test a variation of your website, upload to the dedicated folder in the bucket (`dev` by default):
 
-`aws s3 sync ~/static-website/output/variation s3://example.com/dev/ --profile circle_ci --region=eu-west-1
+`aws s3 sync ~/static-website/variation s3://example.com/dev/ --profile circle_ci --region=eu-west-1`
 
 You can add the `--dryrun` flag to check what would be done...
 

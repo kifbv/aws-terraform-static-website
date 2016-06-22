@@ -35,7 +35,7 @@ resource "aws_cloudfront_distribution" "s3_distribution_blue" {
   # aliases for root, www and production domains
   aliases = ["${element(split(",", var.domain_names), count.index)}",
              "www.${element(split(",", var.domain_names), count.index)}",
-             "blue.${element(split(",", var.domain_names), count.index)}"]
+             "${var.blue_sub_domain}.${element(split(",", var.domain_names), count.index)}"]
 
   # cache behaviour will be common to all websites
   default_cache_behavior {
@@ -99,7 +99,7 @@ resource "aws_cloudfront_distribution" "s3_distribution_green" {
 
   # aliases for root, www and development domains
   aliases = ["*.${element(split(",", var.domain_names), count.index)}",
-             "green.${element(split(",", var.domain_names), count.index)}"]
+             "${var.green_sub_domain}.${element(split(",", var.domain_names), count.index)}"]
 
   # cache behaviour will be common to all websites
   default_cache_behavior {

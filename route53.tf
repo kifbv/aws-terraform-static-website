@@ -23,7 +23,9 @@ resource "aws_route53_record" "production" {
   name           = "${element(split(",", var.domain_names), count.index)}"
   zone_id        = "${element(aws_route53_zone.root_zone.*.zone_id, count.index)}"
   type           = "A"
-  weight         = "${var.blue_weight}"
+  weighted_routing_policy {
+    weight         = "${var.blue_weight}"
+  }
   set_identifier = "${element(split(",", var.domain_names), count.index)}-blue"
   alias {
     name                   = "${element(aws_cloudfront_distribution.s3_distribution_blue.*.domain_name, count.index)}"
@@ -38,7 +40,9 @@ resource "aws_route53_record" "production-www" {
   name           = "www.${element(split(",", var.domain_names), count.index)}"
   zone_id        = "${element(aws_route53_zone.root_zone.*.zone_id, count.index)}"
   type           = "A"
-  weight         = "${var.blue_weight}"
+  weighted_routing_policy {
+    weight         = "${var.blue_weight}"
+  }
   set_identifier = "${element(split(",", var.domain_names), count.index)}-blue"
   alias {
     name                   = "${element(aws_cloudfront_distribution.s3_distribution_blue.*.domain_name, count.index)}"
@@ -53,7 +57,9 @@ resource "aws_route53_record" "production-blue" {
   name           = "blue.${element(split(",", var.domain_names), count.index)}"
   zone_id        = "${element(aws_route53_zone.root_zone.*.zone_id, count.index)}"
   type           = "A"
-  weight         = "${var.blue_weight}"
+  weighted_routing_policy {
+    weight         = "${var.blue_weight}"
+  }
   set_identifier = "${element(split(",", var.domain_names), count.index)}-blue"
   alias {
     name                   = "${element(aws_cloudfront_distribution.s3_distribution_blue.*.domain_name, count.index)}"
@@ -69,7 +75,9 @@ resource "aws_route53_record" "development" {
   name           = "${element(split(",", var.domain_names), count.index)}"
   zone_id        = "${element(aws_route53_zone.root_zone.*.zone_id, count.index)}"
   type           = "A"
-  weight         = "${var.green_weight}"
+  weighted_routing_policy {
+    weight         = "${var.green_weight}"
+  }
   set_identifier = "${element(split(",", var.domain_names), count.index)}-green"
   alias {
     name                   = "${element(aws_cloudfront_distribution.s3_distribution_green.*.domain_name, count.index)}"
@@ -85,7 +93,9 @@ resource "aws_route53_record" "development-www" {
   name           = "www.${element(split(",", var.domain_names), count.index)}"
   zone_id        = "${element(aws_route53_zone.root_zone.*.zone_id, count.index)}"
   type           = "A"
-  weight         = "${var.green_weight}"
+  weighted_routing_policy {
+    weight         = "${var.green_weight}"
+  }
   set_identifier = "${element(split(",", var.domain_names), count.index)}-green"
   alias {
     name                   = "${element(aws_cloudfront_distribution.s3_distribution_green.*.domain_name, count.index)}"
@@ -101,7 +111,9 @@ resource "aws_route53_record" "development-green" {
   name           = "green.${element(split(",", var.domain_names), count.index)}"
   zone_id        = "${element(aws_route53_zone.root_zone.*.zone_id, count.index)}"
   type           = "A"
-  weight         = "${var.green_weight}"
+  weighted_routing_policy {
+    weight         = "${var.green_weight}"
+  }
   set_identifier = "${element(split(",", var.domain_names), count.index)}-green"
   alias {
     name                   = "${element(aws_cloudfront_distribution.s3_distribution_green.*.domain_name, count.index)}"
